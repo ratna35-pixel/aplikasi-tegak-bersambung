@@ -1,0 +1,147 @@
+/* --- 0. Dasar Halaman --- */
+body {
+    margin: 0;
+    /* Gunakan font yang sudah disepakati (misalnya Balsamiq Sans) */
+    font-family: 'Balsamiq Sans', cursive, sans-serif; 
+    color: #4b4b66; 
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0e6fa, #fffacd); /* Background Gradien Ceria */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.menu-container {
+    width: 100%;
+    max-width: 1000px; /* Lebar maksimum untuk layar desktop */
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Animasi Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 1. Header dan Tombol Kembali --- */
+.menu-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.menu-header h1 {
+    color: #e95420; /* Oranye */
+    font-size: 2.5em;
+    margin: 0;
+    text-shadow: 2px 2px 0 #ffde59;
+}
+
+.back-button {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    text-decoration: none;
+    color: #9370db; /* Ungu Lavender */
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.2s, transform 0.2s;
+}
+.back-button:hover {
+    color: #800080; 
+    transform: translateX(-3px);
+}
+
+/* --- 2. Grid Pilihan Menu --- */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.menu-card {
+    display: block; /* Agar seluruh card bisa diklik */
+    text-decoration: none;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 4px solid transparent;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Styling Berdasarkan Warna Tema */
+.tracing-card {
+    background-color: #ffe0b2; /* Oranye Muda Pastel */
+    border-color: #ff9800;
+}
+.tracing-card:hover {
+    border-color: #e95420;
+}
+
+.sentence-card {
+    background-color: #c5cae9; /* Ungu Muda Pastel */
+    border-color: #673ab7;
+}
+.sentence-card:hover {
+    border-color: #9370db;
+}
+
+.copy-card {
+    background-color: #fff9c4; /* Kuning Muda Pastel */
+    border-color: #ffeb3b;
+}
+.copy-card:hover {
+    border-color: #ffde59;
+}
+
+/* Judul dan Ikon di Card */
+.menu-card h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #4b4b66; 
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+.menu-card p {
+    color: #666;
+    font-size: 1em;
+}
+
+.card-icon {
+    font-size: 3em;
+    margin-bottom: 5px;
+    /* Tambahkan sedikit animasi float pada ikon */
+    animation: float 4s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0px); }
+    100% { transform: translate(0, -5px); }
+}
+
+/* --- 3. Responsif --- */
+@media (max-width: 768px) {
+    .menu-header h1 {
+        font-size: 2em;
+    }
+    .back-button {
+        position: static;
+        margin-bottom: 15px;
+        display: block;
+        text-align: left;
+    }
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+}

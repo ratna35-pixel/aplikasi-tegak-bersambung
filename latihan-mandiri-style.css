@@ -1,0 +1,269 @@
+@font-face {
+    font-family: 'KurikulumSambung'; /* Beri nama font baru Anda */
+    src: url('Tegak Bersambung_IWK.woff2') format('woff2'), /* Format prioritas utama */
+         url('Tegak Bersambung_IWK.woff') format('woff');  /* Format cadangan */
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- 0. Dasar Halaman --- */
+body {
+    margin: 0;
+    font-family: 'Playful', cursive, bubblegum Sans; 
+    color: #4b4b66; 
+    background-color: #f0f8ff; 
+    min-height: 100vh;
+}
+
+.latihan-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* --- 1. Navbar dan Navigasi --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #ffffff; 
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    text-decoration: none;
+    color: #9370db; 
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.2s;
+}
+.back-button:hover {
+    color: #800080; 
+}
+
+.pelajaran-judul {
+    color: #e95420; 
+    font-size: 1.6em;
+    margin: 0;
+    font-weight: 900;
+}
+
+.nav-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button {
+    background-color: #ffde59; 
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    color: #4b4b66;
+    transition: all 0.2s;
+    box-shadow: 0 3px 0 #f7b731;
+}
+
+.nav-button:hover {
+    background-color: #f7b731; 
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 #f7b731;
+}
+
+/* --- 2. Area Tulis Utama (Canvas Besar) --- */
+.writing-area {
+    display: flex;
+    flex-grow: 1; 
+    padding: 0;
+}
+
+/* Canvas Wrapper: Menampung Canvas dan Garis Background */
+.canvas-wrapper {
+    flex-grow: 1;
+    background-color: white;
+    border: 5px solid #9370db; 
+    border-radius: 15px;
+    padding: 20px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    position: relative;
+    overflow: hidden; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    
+    /* SIMULASI GARIS BUKU TULIS TEGAK BERSAMBUNG (GARIS 3) */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #f0f8ff, 
+        #f0f8ff 0px,
+        #cccccc 1px, /* Garis tipis 1 */
+        transparent 1px, 
+        transparent 15px, 
+        #cccccc 16px, /* Garis tipis 2 */
+        transparent 16px, 
+        transparent 30px,
+        #cccccc 31px, /* Garis tipis 3 */
+        transparent 31px,
+        transparent 45px, 
+        #e95420 45px, /* Garis Utama Merah (Garis ke-4) */
+        #e95420 46px, 
+        transparent 46px, 
+        transparent 60px /* Jarak untuk mengulang pola */
+    );
+    background-size: 100% 90px;
+    background-origin: content-box; 
+}
+
+/* Elemen Canvas (di atas garis dan panduan) */
+#tracingCanvas {
+    width: 100%;
+    height: 100%;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    cursor: url('krayon.png') 16 16, crosshair; 
+    z-index: 10;
+}
+
+/* WADAH PANDUAN BARU */
+#guide-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Penting: tidak menghalangi goresan */
+    z-index: 5;
+    /* Penyesuaian padding untuk mencocokkan padding canvas-wrapper */
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+
+/* Huruf Panduan Bertitik (Dot-dot) - Sekarang solid untuk debugging */
+.tracing-guide {
+    position: absolute;
+    font-size: 4em; /* Ukuran disesuaikan agar pas dengan pola 90px */
+    line-height: 2; 
+    
+    font-weight: 900;
+    /* DEBUGGING: Ungu solid agar terlihat jelas */
+    color: #9370db; 
+    opacity: 1;    
+    text-shadow: none; 
+
+    font-family: 'KurikulumSambung', cursive; 
+    pointer-events: none; 
+    
+    left: 5%; /* Posisi horizontal */
+    white-space: nowrap; 
+    user-select: none; 
+}
+
+/* --- 3. Kontrol dan Feedback Footer --- */
+.controls-feedback-footer {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.controls-footer {
+    display: flex;
+    gap: 15px;
+}
+
+.control-button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 0 #a04000; 
+}
+
+.reset-btn {
+    background-color: #ffde59; 
+    color: #4b4b66; 
+    box-shadow: 0 4px 0 #f7b731;
+}
+
+.save-btn {
+    background-color: #9370db; /* Ungu (Selesai) */
+    color: white;
+    box-shadow: 0 4px 0 #800080;
+}
+
+.control-button:hover {
+    transform: translateY(2px); 
+    box-shadow: 0 2px 0 #a04000;
+}
+
+/* Area Nilai dan Komentar */
+.feedback-area {
+    display: flex;
+    gap: 40px;
+    font-size: 1.1em;
+}
+
+.score-display, .comment-display {
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.score-display {
+    color: #ffffff;
+    background-color: #e95420; 
+}
+
+.comment-display {
+    color: #4b4b66;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+}
+
+/* --- Media Query untuk Responsivitas (Ponsel/Tablet) --- */
+@media (max-width: 768px) {
+    .latihan-container {
+        padding: 10px;
+    }
+
+    .navbar {
+        flex-wrap: wrap; 
+        gap: 10px;
+        padding: 10px;
+    }
+    .nav-controls {
+        width: 100%;
+        justify-content: space-around;
+        order: 1; 
+    }
+    
+    .pelajaran-judul {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .controls-feedback-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .feedback-area {
+        gap: 15px;
+        font-size: 1em;
+        flex-wrap: wrap;
+    }
+}

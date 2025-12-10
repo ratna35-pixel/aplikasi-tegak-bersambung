@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Menulis Tegak Bersambung</title>
+    <link rel="stylesheet" href="latihan-mandiri-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Pinyon+Script&family=Style+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/ukij-elipbe" type="text/css"/>
+</head>
+<body>
+    <div class="latihan-container">
+        
+        <header class="navbar">
+            <a href="menu-latihan.html" class="back-button">← Menu</a>
+            <h2 class="pelajaran-judul">Kalimat Saat Ini: <span id="current-letter">Ajar anak membaca</span></h2> 
+            <div class="nav-controls">
+                <button class="nav-button prev-btn" id="prev-btn">← Sebelumnya</button>
+                <button class="nav-button next-btn" id="next-btn">Selanjutnya →</button>
+            </div>
+        </header>
+
+        <main class="writing-area">
+            
+            <div class="canvas-wrapper">
+                <canvas id="tracingCanvas"></canvas>
+                
+                <div id="guide-container"></div> 
+                
+            </div>
+        </main>
+
+        <footer class="controls-feedback-footer">
+            <div class="controls-footer">
+                <button class="control-button reset-btn" id="reset-btn">🗑️ Hapus</button>
+                <button class="control-button save-btn" id="finish-btn">✅ Selesai</button>
+            </div>
+
+            <div class="feedback-area">
+                <div class="score-display">
+                    Nilai Anda: <span id="score">--</span>
+                </div>
+                <div class="comment-display">
+                    Komentar Guru: <span id="comment">Belum Diperiksa.</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    
+    <script src="main.js"></script> 
+</body>
+</html>
